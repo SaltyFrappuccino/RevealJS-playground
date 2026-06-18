@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title">
+  <title id="title">Нулевая невязка</title>
+  <rect width="760" height="460" rx="26" fill="#0b1728"/>
+  <g transform="translate(150 62)">
+    <rect width="460" height="336" rx="22" fill="#10243d" stroke="#67e8f9" stroke-opacity=".48"/>
+    <g font-family="Consolas, monospace" font-weight="800" text-anchor="middle">
+      <text x="230" y="112" fill="#f3f8ff" font-size="54">r = Ax - b</text>
+      <text x="230" y="226" fill="#67e8f9" font-size="118">0</text>
+      <text x="230" y="292" fill="#f6c65b" font-size="30">проверка пройдена</text>
+    </g>
+  </g>
+  <circle cx="124" cy="94" r="16" fill="#67e8f9" opacity=".35"/>
+  <circle cx="646" cy="368" r="22" fill="#f6c65b" opacity=".28"/>
+  <path d="M86 334h120M554 120h118" stroke="#87efac" stroke-width="8" stroke-linecap="round"/>
+</svg>

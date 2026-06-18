@@ -1,0 +1,37 @@
+[data-reactive] {
+  position: relative;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+[data-reactive]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(103, 232, 249, 0.2), transparent 36%);
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+[data-reactive].is-reactive {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px);
+  border-color: rgba(103, 232, 249, 0.52) !important;
+  box-shadow: 0 18px 48px rgba(103, 232, 249, 0.13), 0 0 0 1px rgba(103, 232, 249, 0.14) inset !important;
+}
+
+[data-reactive].is-reactive::before {
+  opacity: 1;
+}
+
+.hero-grid img {
+  transform-origin: center;
+  transition: filter 240ms ease;
+}
+
+.hero-grid img:hover {
+  filter: drop-shadow(0 0 30px rgba(103, 232, 249, 0.2));
+}

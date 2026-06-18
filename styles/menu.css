@@ -1,0 +1,56 @@
+.slide-menu,
+.slide-menu.slide-menu--left {
+  position: fixed !important;
+  inset: 0 auto 0 0 !important;
+  width: min(410px, calc(100vw - 42px)) !important;
+  height: 100vh !important;
+  border: 1px solid rgba(103, 232, 249, 0.3) !important;
+  border-width: 0 1px 0 0 !important;
+  border-radius: 0 !important;
+  transform: translateX(-105%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
+  transition: transform 220ms ease, opacity 160ms ease !important;
+}
+
+.slide-menu.active,
+.slide-menu.slide-menu--left.active {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.slide-menu-overlay {
+  background: rgba(2, 7, 13, 0.42) !important;
+  backdrop-filter: blur(4px);
+}
+
+.slide-menu .slide-menu-toolbar {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  padding: 10px !important;
+}
+
+.slide-menu .slide-menu-panel {
+  max-height: calc(100vh - 94px) !important;
+}
+
+.slide-menu .slide-menu-items {
+  display: block !important;
+}
+
+.slide-menu .menu-cover,
+.slide-menu .menu-section,
+.slide-menu .menu-final {
+  grid-column: 1 / -1;
+}
+
+.slide-menu .menu-child {
+  min-width: 0;
+}
+
+.slide-menu .toolbar-panel-button {
+  width: 100% !important;
+  overflow: hidden !important;
+}

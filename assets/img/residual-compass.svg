@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 320" role="img" aria-labelledby="title">
+  <title id="title">Невязка и направление ошибки</title>
+  <rect width="820" height="320" rx="22" fill="#0b1728"/>
+  <g transform="translate(120 36)">
+    <circle cx="124" cy="124" r="112" fill="#08111f" stroke="#244766" stroke-width="2"/>
+    <circle cx="124" cy="124" r="76" fill="none" stroke="#244766" stroke-width="2"/>
+    <circle cx="124" cy="124" r="38" fill="none" stroke="#244766" stroke-width="2"/>
+    <path d="M124 124l72-58" stroke="#f6c65b" stroke-width="8" stroke-linecap="round"/>
+    <path d="M124 124l-26 54" stroke="#67e8f9" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="124" cy="124" r="10" fill="#fff"/>
+    <text x="210" y="62" fill="#f6c65b" font-family="Consolas, monospace" font-size="28" font-weight="700">Ax</text>
+    <text x="62" y="214" fill="#67e8f9" font-family="Consolas, monospace" font-size="28" font-weight="700">b</text>
+  </g>
+  <g transform="translate(410 74)" font-family="Consolas, monospace" font-weight="700">
+    <rect x="0" y="0" width="308" height="172" rx="14" fill="#10243d" stroke="#67e8f9" stroke-opacity=".45"/>
+    <text x="34" y="58" fill="#f3f8ff" font-size="34">r = Ax - b</text>
+    <text x="34" y="114" fill="#67e8f9" font-size="28">||r||∞ → 0</text>
+    <text x="34" y="150" fill="#f6c65b" font-size="24">качество решения</text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+.reveal .fragment {
+  will-change: transform, opacity, filter;
+}
+
+.reveal .fragment:not(.visible) {
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  filter: blur(4px);
+}
+
+.reveal .fragment.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition: opacity 420ms ease, transform 420ms ease, filter 420ms ease;
+}
+
+.reveal .fragment.current-fragment {
+  border-color: rgba(246, 198, 91, 0.62) !important;
+  box-shadow: 0 0 0 1px rgba(246, 198, 91, 0.18), 0 18px 46px rgba(103, 232, 249, 0.14) !important;
+}
+
+.reveal .fragment.current-fragment b {
+  color: var(--amber);
+}

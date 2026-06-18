@@ -1,0 +1,18 @@
+{
+  "name": "numerical-methods-reveal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun scripts/dev-server.mjs",
+    "start": "bun scripts/dev-server.mjs",
+    "build": "bun scripts/build.mjs",
+    "check:local": "bun scripts/check-local.mjs"
+  },
+  "dependencies": {
+    "katex": "^0.16.25",
+    "mathjs": "^15.1.0",
+    "reveal.js": "^5.2.1",
+    "reveal.js-menu": "^2.1.0"
+  }
+}
