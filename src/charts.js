@@ -4,22 +4,24 @@ export function renderIterationChart(container, payload) {
 
   const canvas = document.createElement("canvas");
   canvas.className = "convergence-chart";
-  canvas.width = 360;
-  canvas.height = 128;
   canvas.setAttribute("aria-label", payload.history ? "График сходимости" : "Схема шагов исключения");
   container.append(canvas);
 
   const context = canvas.getContext("2d");
   const state = {
-    points: mapPoints(values, canvas.width, canvas.height),
+    values,
+    points: [],
     progress: 0,
     hover: -1,
+    width: 0,
+    height: 0,
+    ratio: 0,
     label: payload.history ? "Невязка" : "Шаги"
   };
 
   canvas.addEventListener("pointermove", (event) => {
     const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+    const x = event.clientX - rect.left;
     state.hover = nearestPoint(state.points, x);
     draw(context, canvas, state);
   });
@@ -29,7 +31,10 @@ export function renderIterationChart(container, payload) {
     draw(context, canvas, state);
   });
 
-  animate(context, canvas, state);
+  canvas.addEventListener("chart-resize", () => draw(context, canvas, state));
+  new ResizeObserver(() => draw(context, canvas, state)).observe(canvas);
+  draw(context, canvas, state);
+  requestAnimationFrame(() => animate(context, canvas, state));
 }
 
 function syntheticValues(count) {
@@ -61,7 +66,8 @@ function animate(context, canvas, state) {
 }
 
 function draw(context, canvas, state) {
-  const { width, height } = canvas;
+  syncCanvas(canvas, context, state);
+  const { width, height } = state;
   const points = state.points;
   context.clearRect(0, 0, width, height);
 
@@ -74,7 +80,7 @@ function draw(context, canvas, state) {
   context.strokeStyle = "rgba(154, 190, 229, 0.18)";
   context.lineWidth = 1;
   for (let i = 0; i < 4; i += 1) {
-    const y = 18 + i * 26;
+    const y = 18 + i * ((height - 38) / 3);
     context.beginPath();
     context.moveTo(18, y);
     context.lineTo(width - 16, y);
@@ -120,6 +126,22 @@ function nearestPoint(points, x) {
     const distance = Math.abs(point.x - x);
     return distance < best.distance ? { index, distance } : best;
   }, { index: 0, distance: Infinity }).index;
+}
+
+function syncCanvas(canvas, context, state) {
+  const rect = canvas.getBoundingClientRect();
+  const width = Math.max(260, Math.round(rect.width || 360));
+  const height = Math.max(110, Math.round(rect.height || 128));
+  const ratio = Math.max(1, window.devicePixelRatio || 1);
+  if (state.width === width && state.height === height && state.ratio === ratio) return;
+
+  state.width = width;
+  state.height = height;
+  state.ratio = ratio;
+  canvas.width = Math.round(width * ratio);
+  canvas.height = Math.round(height * ratio);
+  context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  state.points = mapPoints(state.values, width, height);
 }
 
 function roundRect(context, x, y, width, height, radius) {

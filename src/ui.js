@@ -4,7 +4,7 @@ import { examples, createRandomDominantSystem } from "./examples.js";
 import { solveGauss } from "./methods/gauss.js";
 import { solveGaussJordan } from "./methods/gaussJordan.js";
 import { solveGaussSeidel } from "./methods/gaussSeidel.js";
-import { renderIterationChart } from "./charts.js";
+import { renderIterationChart } from "./charts.js?v=20260619c";
 
 const methods = {
   gauss: solveGauss,
@@ -28,6 +28,10 @@ export function initSolver() {
   const chart = app.querySelector("#iterationChart");
   const status = app.querySelector("#solverStatus");
   const compare = app.querySelector("#compareResult");
+  const right = app.querySelector(".solver-right");
+  const rowCard = app.querySelector(".row-card");
+  let compareTimer = 0;
+  let layoutFrame = 0;
 
   input.value = examples.stable3.input;
 
@@ -78,7 +82,7 @@ export function initSolver() {
   }
 
   function solve() {
-    compare.innerHTML = "";
+    hideCompare(true);
     chart.innerHTML = "";
     try {
       const { A, b } = parseSystem(input.value);
@@ -104,6 +108,11 @@ export function initSolver() {
   }
 
   function compareAll() {
+    if (right.classList.contains("compare-active")) {
+      hideCompare();
+      return;
+    }
+
     compare.innerHTML = "";
     try {
       const { A, b } = parseSystem(input.value);
@@ -122,9 +131,84 @@ export function initSolver() {
         item.append(title, tex);
         compare.append(item);
       });
+      showCompare();
     } catch (error) {
       compare.textContent = error.message;
+      showCompare();
     }
+  }
+
+  function showCompare() {
+    clearTimeout(compareTimer);
+    cancelAnimationFrame(layoutFrame);
+    right.classList.remove("compare-active");
+    compare.classList.remove("compare-active");
+    rowCard.style.height = "248px";
+    compare.style.maxHeight = "0px";
+    compare.style.visibility = "visible";
+    compare.style.opacity = "1";
+    animateLayout(248, 172, 0, 124, () => {
+      right.classList.add("compare-active");
+      compare.classList.add("compare-active");
+      rowCard.style.height = "";
+      compare.style.maxHeight = "";
+      compare.style.visibility = "";
+      compare.style.opacity = "";
+      refreshChart();
+    });
+  }
+
+  function hideCompare(immediate = false) {
+    clearTimeout(compareTimer);
+    cancelAnimationFrame(layoutFrame);
+    rowCard.style.height = "172px";
+    compare.style.maxHeight = "124px";
+    right.classList.remove("compare-active");
+    compare.classList.remove("compare-active");
+    refreshChart();
+
+    if (immediate) {
+      compare.innerHTML = "";
+      rowCard.style.height = "";
+      compare.style.maxHeight = "";
+      compare.style.visibility = "";
+      compare.style.opacity = "";
+      return;
+    }
+
+    animateLayout(172, 248, 124, 0, () => {
+      compare.innerHTML = "";
+      rowCard.style.height = "";
+      compare.style.maxHeight = "";
+      compare.style.visibility = "";
+      compare.style.opacity = "";
+      refreshChart();
+    });
+  }
+
+  function refreshChart() {
+    chart.querySelector("canvas")?.dispatchEvent(new Event("chart-resize"));
+  }
+
+  function animateLayout(fromRow, toRow, fromCompare, toCompare, done) {
+    const duration = 560;
+    const started = performance.now();
+    const ease = (value) => 1 - Math.pow(1 - value, 3);
+
+    const tick = (time) => {
+      const progress = Math.min(1, (time - started) / duration);
+      const eased = ease(progress);
+      rowCard.style.height = `${fromRow + (toRow - fromRow) * eased}px`;
+      compare.style.maxHeight = `${fromCompare + (toCompare - fromCompare) * eased}px`;
+      refreshChart();
+      if (progress < 1) {
+        layoutFrame = requestAnimationFrame(tick);
+        return;
+      }
+      done();
+    };
+
+    layoutFrame = requestAnimationFrame(tick);
   }
 }
 

@@ -1,5 +1,5 @@
 import { renderDocumentMath } from "./core/latex.js";
-import { initSolver } from "./ui.js?v=20260619b";
+import { initSolver } from "./ui.js?v=20260619g";
 import { initFragments } from "./fragments.js?v=20260618";
 import { initInteractions, refreshInteractiveElements } from "./interactions.js?v=20260618";
 import { decorateMenuHierarchy } from "./menu.js?v=20260618";

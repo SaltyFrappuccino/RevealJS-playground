@@ -62,12 +62,12 @@ body {
 }
 
 .reveal .slides section:has(#solverApp) {
-  padding: 16px 24px 18px;
+  padding: 12px 22px 14px;
 }
 
 .reveal .slides section:has(#solverApp) h2 {
-  margin-bottom: 14px;
-  font-size: 52px;
+  margin-bottom: 10px;
+  font-size: 50px;
 }
 
 .reveal h1,
@@ -392,7 +392,7 @@ section:has(.section-kicker)::after {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 18px;
-  height: 604px;
+  height: 632px;
 }
 
 .solver-left,
@@ -563,7 +563,7 @@ section:has(.section-kicker)::after {
 
 #systemInput {
   width: 100%;
-  min-height: 292px;
+  height: 318px;
   resize: none;
   box-sizing: border-box;
   border: 1px solid var(--line-strong);
@@ -593,7 +593,7 @@ section:has(.section-kicker)::after {
 .solver-right {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 132px 132px 176px minmax(112px, 1fr);
+  grid-template-rows: 140px 140px auto auto;
   align-content: start;
   gap: 12px;
 }
@@ -665,8 +665,13 @@ section:has(.section-kicker)::after {
   gap: 16px;
   align-items: stretch;
   color: var(--cyan);
-  min-height: 176px;
-  max-height: 176px;
+  min-height: 0;
+  height: 248px;
+  transition: height 560ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.solver-right.compare-active .row-card {
+  height: 172px;
 }
 
 #iterationChart {
@@ -729,7 +734,22 @@ section:has(.section-kicker)::after {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   min-height: 0;
+  max-height: 0;
   align-self: start;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  transition: max-height 560ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.solver-right.compare-active .compare-result,
+.compare-result.compare-active {
+  max-height: 124px;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0ms;
 }
 
 .compare-row {
