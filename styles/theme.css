@@ -705,7 +705,7 @@ section:has(.section-kicker)::after {
   position: absolute;
   inset: auto -12% -35% 18%;
   height: 120px;
-  background: linear-gradient(90deg, transparent, rgba(246, 198, 91, 0.24), transparent);
+  /* background: linear-gradient(90deg, transparent, rgba(246, 198, 91, 0.24), transparent); */
   transform: rotate(-8deg);
   animation: riskSweep 3.8s ease-in-out infinite;
 }
