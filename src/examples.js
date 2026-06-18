@@ -18,13 +18,16 @@ export const examples = {
 };
 
 export function createRandomDominantSystem(size = 4) {
-  const x = Array.from({ length: size }, (_, index) => index + 1);
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const x = Array.from({ length: size }, () => randInt(-5, 5));
   const A = Array.from({ length: size }, (_, i) => {
     const row = Array.from({ length: size }, (_, j) => {
       if (i === j) return 0;
-      return ((i + 2) * (j + 3)) % 5 - 2;
+      return randInt(-4, 4);
     });
-    row[i] = row.reduce((sum, value) => sum + Math.abs(value), 0) + size + i + 2;
+    const offDiagonal = row.reduce((sum, value) => sum + Math.abs(value), 0);
+    // Гарантируем диагональное преобладание для сходимости итерационных методов.
+    row[i] = (Math.random() < 0.5 ? -1 : 1) * (offDiagonal + randInt(1, 6));
     return row;
   });
   const b = A.map((row) => row.reduce((sum, value, index) => sum + value * x[index], 0));
