@@ -61,6 +61,15 @@ body {
   overflow: hidden;
 }
 
+.reveal .slides section:has(#solverApp) {
+  padding: 16px 24px 18px;
+}
+
+.reveal .slides section:has(#solverApp) h2 {
+  margin-bottom: 14px;
+  font-size: 52px;
+}
+
 .reveal h1,
 .reveal h2,
 .reveal h3 {
@@ -381,9 +390,9 @@ section:has(.section-kicker)::after {
 
 .solver-app {
   display: grid;
-  grid-template-columns: 0.96fr 1.04fr;
-  gap: 20px;
-  height: 558px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+  height: 604px;
 }
 
 .solver-left,
@@ -554,7 +563,7 @@ section:has(.section-kicker)::after {
 
 #systemInput {
   width: 100%;
-  min-height: 268px;
+  min-height: 292px;
   resize: none;
   box-sizing: border-box;
   border: 1px solid var(--line-strong);
@@ -584,14 +593,15 @@ section:has(.section-kicker)::after {
 .solver-right {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 126px 126px 156px auto;
+  grid-template-rows: 132px 132px 176px minmax(112px, 1fr);
   align-content: start;
   gap: 12px;
 }
 
 .solver-card {
+  box-sizing: border-box;
   min-width: 0;
-  padding: 16px 18px;
+  padding: 14px 14px;
   overflow: hidden;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -606,44 +616,111 @@ section:has(.section-kicker)::after {
 }
 
 .solver-card .katex {
-  font-size: 0.9em;
+  font-size: 0.76em;
+}
+
+#systemPreview .katex {
+  font-size: 0.64em;
+}
+
+#solverResult .katex {
+  font-size: 0.72em;
+}
+
+#residualResult .katex {
+  font-size: 0.78em;
+}
+
+.solver-note {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.solver-card > div:not(#iterationChart):not(#solverSteps) {
+  display: grid;
+  height: calc(100% - 30px);
+  min-width: 0;
+  place-items: center;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(103, 232, 249, 0.42) rgba(255, 255, 255, 0.05);
+}
+
+.solver-card > div:not(#iterationChart):not(#solverSteps)::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.solver-card > div:not(#iterationChart):not(#solverSteps)::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(103, 232, 249, 0.48);
 }
 
 .row-card {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 12px;
-  align-items: start;
+  grid-template-columns: 248px minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
   color: var(--cyan);
+  min-height: 176px;
+  max-height: 176px;
 }
 
 #iterationChart {
   display: grid;
-  min-height: 74px;
+  min-height: 0;
   place-items: center;
 }
 
 #solverSteps {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 8px 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 8px 12px;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(103, 232, 249, 0.55) rgba(255, 255, 255, 0.06);
+}
+
+#solverSteps::-webkit-scrollbar {
+  width: 8px;
+}
+
+#solverSteps::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+#solverSteps::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--cyan), rgba(246, 198, 91, 0.82));
 }
 
 .step-formula {
-  display: inline-flex;
-  min-height: auto;
-  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 10px;
   border: 1px solid rgba(103, 232, 249, 0.12);
-  border-radius: 999px;
+  border-radius: 16px;
   background: rgba(103, 232, 249, 0.05);
   color: var(--muted);
-  font-size: 15px;
+  font-size: 14px;
+  min-width: 0;
+  overflow: visible;
 }
 
 .step-formula .katex {
-  font-size: 0.96em;
+  max-width: 100%;
+  font-size: 0.8em;
 }
 
 .compare-result {
@@ -652,6 +729,7 @@ section:has(.section-kicker)::after {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   min-height: 0;
+  align-self: start;
 }
 
 .compare-row {
@@ -675,7 +753,7 @@ section:has(.section-kicker)::after {
 }
 
 .compare-row .katex {
-  font-size: 0.63em;
+  font-size: 0.54em;
 }
 
 .fun-image {
@@ -719,7 +797,6 @@ section:has(.section-kicker)::after {
   position: absolute;
   inset: auto -12% -35% 18%;
   height: 120px;
-  /* background: linear-gradient(90deg, transparent, rgba(246, 198, 91, 0.24), transparent); */
   transform: rotate(-8deg);
   animation: riskSweep 3.8s ease-in-out infinite;
 }

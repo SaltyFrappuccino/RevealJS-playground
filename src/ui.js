@@ -183,17 +183,16 @@ function renderSteps(container, payload) {
   if (payload.history) {
     const last = payload.history.at(-1);
     const list = [
-      `\\text{Старт: }x^{(0)}=(0,\\dots,0)^T`,
+      `x^{(0)}=(0,\\dots,0)^T`,
       `\\text{Итераций: }${payload.iterations}`,
-      `\\text{Сходимость: }\\text{${payload.converged ? "достигнута" : "не достигнута за лимит"}}`,
-      `\\text{Последнее изменение: }${format(last.delta)}`
+      `\\text{Сходимость: }\\text{${payload.converged ? "да" : "нет"}}`,
+      `\\Delta=${format(last.delta)}`
     ];
     list.forEach((tex) => appendFormula(container, tex));
     return;
   }
 
-  payload.steps.slice(0, 6).forEach((tex) => appendFormula(container, tex));
-  if (payload.steps.length > 6) appendFormula(container, `\\text{ещё ${payload.steps.length - 6} шагов}` );
+  payload.steps.forEach((tex) => appendFormula(container, tex));
 }
 
 function appendFormula(container, tex) {
@@ -211,7 +210,7 @@ function statusText(payload, A, b) {
 
 function solverResidualToTex(A, x, b) {
   const r = residual(A, x, b);
-  return `\\begin{gathered}r=Ax-b=${vectorToTex(r.vector)}\\\\\\|r\\|_\\infty=${format(r.normInf)}\\end{gathered}`;
+  return `r=Ax-b=${vectorToTex(r.vector)},\\quad \\|r\\|_\\infty=${format(r.normInf)}`;
 }
 
 function format(value) {

@@ -343,6 +343,7 @@
     <div class="solver-card"><b>Система</b><div id="systemPreview"></div></div>
     <div class="solver-card"><b>Решение</b><div id="solverResult"></div></div>
     <div class="solver-card"><b>Невязка</b><div id="residualResult"></div></div>
+    <div class="solver-card"><b>Симметрия</b><div class="solver-note">Я не придумал, что сюда вставить, но нужна симметрия, поэтому теперь тут этот див.</div></div>
     <div class="solver-card row-card"><div id="iterationChart"></div><div id="solverSteps"></div></div>
     <div id="compareResult" class="compare-result"></div>
   </div>
