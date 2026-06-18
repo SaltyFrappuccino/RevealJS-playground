@@ -409,7 +409,8 @@ section:has(.section-kicker)::after {
 .solver-toolbar button,
 .solver-actions button,
 .solver-options select,
-.solver-options input {
+.solver-options input,
+.solver-size input {
   height: 42px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -441,6 +442,19 @@ section:has(.section-kicker)::after {
 
 .solver-options input {
   width: 116px;
+  padding: 0 8px;
+}
+
+.solver-size {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font: 650 17px var(--font);
+}
+
+.solver-size input {
+  width: 64px;
   padding: 0 8px;
 }
 

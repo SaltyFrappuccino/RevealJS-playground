@@ -325,6 +325,7 @@
       <button data-example="wide4">4x4</button>
       <button data-example="exact4">Контроль</button>
       <button data-random>Случайная</button>
+      <label class="solver-size">N <input id="randomSize" type="number" min="2" max="6" step="1" value="4"></label>
     </div>
     <textarea id="systemInput" spellcheck="false" aria-label="Ввод СЛАУ"></textarea>
     <div class="solver-options">

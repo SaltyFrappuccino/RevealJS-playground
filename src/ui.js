@@ -39,8 +39,16 @@ export function initSolver() {
     });
   });
 
+  const randomSize = app.querySelector("#randomSize");
+  const clampRandomSize = () => {
+    const size = Math.min(6, Math.max(2, Math.round(Number(randomSize?.value) || 4)));
+    if (randomSize) randomSize.value = String(size);
+    return size;
+  };
+  randomSize?.addEventListener("change", clampRandomSize);
   app.querySelector("[data-random]").addEventListener("click", () => {
-    input.value = createRandomDominantSystem(4);
+    const size = clampRandomSize();
+    input.value = createRandomDominantSystem(size);
     updatePreview();
     solve();
   });

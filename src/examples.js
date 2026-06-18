@@ -26,7 +26,6 @@ export function createRandomDominantSystem(size = 4) {
       return randInt(-4, 4);
     });
     const offDiagonal = row.reduce((sum, value) => sum + Math.abs(value), 0);
-    // Гарантируем диагональное преобладание для сходимости итерационных методов.
     row[i] = (Math.random() < 0.5 ? -1 : 1) * (offDiagonal + randInt(1, 6));
     return row;
   });
