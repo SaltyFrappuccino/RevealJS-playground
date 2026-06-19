@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "katex": "^0.16.25",
-    "mathjs": "^15.1.0",
     "reveal.js": "^5.2.1",
     "reveal.js-menu": "^2.1.0"
   }

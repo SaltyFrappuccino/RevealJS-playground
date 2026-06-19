@@ -268,7 +268,7 @@
     <span data-tex="\begin{cases}10x-y+2z=6\\-x+11y-z=22\\2x-y+10z=-10\end{cases}"></span>
   </div>
   <div>
-    <span data-tex="x^{(0)}=\begin{bmatrix}0\\0\\0\end{bmatrix},\quad x^{(1)}=\begin{bmatrix}0.6\\2.327\\-0.987\end{bmatrix}"></span>
+    <span data-tex="x^{(0)}=\begin{bmatrix}0\\0\\0\end{bmatrix},\quad x^{(1)}=\begin{bmatrix}0.6\\2.055\\-0.915\end{bmatrix}"></span>
   </div>
 </div>
 
